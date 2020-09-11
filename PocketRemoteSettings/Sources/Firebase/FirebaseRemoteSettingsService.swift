@@ -81,7 +81,7 @@ private extension RemoteConfig {
         let keys = allKeys(from: .remote)
         let object: [String: Any] = Dictionary(uniqueKeysWithValues: keys.compactMap { key in
             let value = configValue(forKey: key)
-            
+
             guard let string = value.stringValue, !string.isEmpty else {
                 return nil
             }
@@ -89,19 +89,25 @@ private extension RemoteConfig {
             if let json = value.jsonValue {
                 return (key, json)
             }
-            
-            if string == "true" || string == "false" {
-                return (key, value.boolValue)
+
+            let trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+
+            if trimmedString.lowercased() == "true" {
+                return (key, true)
             }
-            
-            if let number = value.numberValue {
-                if let string = value.stringValue, string.contains(".") {
-                    return (key, number.doubleValue)
-                } else {
-                    return (key, number.intValue)
-                }
+
+            if trimmedString.lowercased() == "false" {
+                return (key, false)
             }
-            
+
+            if let int = Int(trimmedString) {
+                return (key, int)
+            }
+
+            if let double = Double(trimmedString) {
+                return (key, double)
+            }
+
             return (key, string)
         })
 
