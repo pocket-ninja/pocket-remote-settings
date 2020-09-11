@@ -1,0 +1,38 @@
+{
+  "name": "PocketRemoteSettings",
+  "version": "0.0.1",
+  "summary": "The Pocket Ninja Remote Settings client.",
+  "homepage": "https://github.com/pocket-ninja/pocket-remote-settings",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "egor mihneivch": "cursed.elfenlaid@gmail.com"
+  },
+  "source": {
+    "git": "git@github.com:pocket-ninja/pocket-remote-settings.git",
+    "tag": "0.0.1"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "swift_versions": "5.3",
+  "static_framework": true,
+  "source_files": "PocketRemoteSettings/Sources/**/*",
+  "dependencies": {
+    "RxSwift": [
+      "~> 5"
+    ],
+    "RxRelay": [
+
+    ],
+    "RxCocoa": [
+
+    ],
+    "Firebase/RemoteConfig": [
+
+    ]
+  },
+  "swift_version": "5.3"
+}

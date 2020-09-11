@@ -1,0 +1,6 @@
+framework module PocketRemoteSettings {
+  umbrella header "PocketRemoteSettings-umbrella.h"
+
+  export *
+  module * { export * }
+}
