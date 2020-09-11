@@ -85,12 +85,24 @@ private extension RemoteConfig {
             if let json = value.jsonValue {
                 return (key, json)
             }
-
-            if let string = value.stringValue, !string.isEmpty {
-                return (key, string)
+            
+            if let number = value.numberValue {
+                if let string = value.stringValue, string.contains(".") {
+                    return (key, number.doubleValue)
+                } else {
+                    return (key, number.intValue)
+                }
             }
-
-            return nil
+            
+            guard let string = value.stringValue, !string.isEmpty else {
+                return nil
+            }
+            
+            if string == "true" || string == "false" {
+                return (key, value.boolValue)
+            }
+            
+            return (key, string)
         })
 
         return try? JSONSerialization.data(withJSONObject: object, options: [])
