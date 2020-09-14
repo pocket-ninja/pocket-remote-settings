@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'git@github.com:pocket-ninja/pocket-remote-settings.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
-  s.swift_version = '5.3'
+  s.swift_version = '5.2'
   s.static_framework = true
 
   s.source_files = 'PocketRemoteSettings/Sources/**/*'
