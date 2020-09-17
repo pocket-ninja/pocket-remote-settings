@@ -34,17 +34,16 @@ final class FirebaseRemoteService<Value: Decodable> {
 
     private func fetch() {
         remoteConfig.fetchAndActivate { [weak self] status, error in
-            guard let self = self else {
-                return
-            }
-
             guard status != .error else {
                 trace("Failed to fetch config with error: \(error?.localizedDescription ?? "none")")
                 return
             }
 
             trace("Remote config fetched successfully")
-            self.synchronizeSettings()
+
+            DispatchQueue.main.async {
+                self?.synchronizeSettings()
+            }
         }
     }
 
