@@ -40,7 +40,7 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
-  - PocketRemoteSettings (0.0.1):
+  - PocketRemoteSettings (0.0.7):
     - Firebase/RemoteConfig
     - RxCocoa
     - RxRelay
@@ -86,7 +86,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 672fb0ce96fe7f7f31d43672fca62ad2c9c86f7b
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  PocketRemoteSettings: f6a4363e4d8b7c81c170e21cb8f91a69b601507c
+  PocketRemoteSettings: 5532f3ed0fccd54b2e0bc7ac478ee61f53e88646
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
@@ -94,4 +94,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c761cdddda58d9014a489c002a8b4918a0d2a055
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.3

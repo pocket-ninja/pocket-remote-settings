@@ -3,17 +3,27 @@ import Foundation
 import RxCocoa
 import RxRelay
 import RxSwift
+import Combine
 
 final class FirebaseRemoteService<Value: Decodable> {
     func value() -> Value {
-        settingsRelay.value
+        settings
     }
 
     func asObservable() -> Observable<Value> {
-        settingsRelay.observeOn(MainScheduler.instance).asObservable()
+        settingsRelay
+            .observeOn(MainScheduler.instance)
+            .asObservable()
+    }
+    
+    func asPublisher() -> AnyPublisher<Value, Never> {
+        $settings
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 
     init(initial: Value) {
+        settings = initial
         settingsRelay = BehaviorRelay(value: initial)
     }
 
@@ -22,11 +32,11 @@ final class FirebaseRemoteService<Value: Decodable> {
         settings.minimumFetchInterval = Environment.isDebug ? 60 : 3600
         remoteConfig.configSettings = settings
 
-        NotificationCenter.default.rx
-            .notification(UIApplication.didBecomeActiveNotification)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in self?.fetch() })
-            .disposed(by: disposeBag)
+        NotificationCenter.default
+            .publisher(for: UIApplication.didBecomeActiveNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.fetch() }
+            .store(in: &cancellables)
 
         synchronizeSettings()
         fetch()
@@ -57,12 +67,18 @@ final class FirebaseRemoteService<Value: Decodable> {
             return
         }
 
-        settingsRelay.accept(settings)
+        self.settings = settings
     }
 
-    private lazy var remoteConfig = RemoteConfig.remoteConfig()
+    @Published private var settings: Value {
+        didSet {
+            self.settingsRelay.accept(settings)
+        }
+    }
+    
     private let settingsRelay: BehaviorRelay<Value>
-    private let disposeBag = DisposeBag()
+    private var cancellables = Set<AnyCancellable>()
+    private lazy var remoteConfig = RemoteConfig.remoteConfig()
 }
 
 private enum Environment {
