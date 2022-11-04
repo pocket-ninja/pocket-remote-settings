@@ -1,8 +1,5 @@
 import FirebaseRemoteConfig
 import Foundation
-import RxCocoa
-import RxRelay
-import RxSwift
 import Combine
 
 final class FirebaseRemoteService<Value: Decodable> {
@@ -10,12 +7,6 @@ final class FirebaseRemoteService<Value: Decodable> {
         settings
     }
 
-    func asObservable() -> Observable<Value> {
-        settingsRelay
-            .observeOn(MainScheduler.instance)
-            .asObservable()
-    }
-    
     func asPublisher() -> AnyPublisher<Value, Never> {
         $settings
             .receive(on: DispatchQueue.main)
@@ -24,7 +15,6 @@ final class FirebaseRemoteService<Value: Decodable> {
 
     init(initial: Value) {
         settings = initial
-        settingsRelay = BehaviorRelay(value: initial)
     }
 
     func setup() {
@@ -70,13 +60,7 @@ final class FirebaseRemoteService<Value: Decodable> {
         self.settings = settings
     }
 
-    @Published private var settings: Value {
-        didSet {
-            self.settingsRelay.accept(settings)
-        }
-    }
-    
-    private let settingsRelay: BehaviorRelay<Value>
+    @Published private var settings: Value
     private var cancellables = Set<AnyCancellable>()
     private lazy var remoteConfig = RemoteConfig.remoteConfig()
 }

@@ -9,13 +9,9 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'git@github.com:pocket-ninja/pocket-remote-settings.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '13.0'
-  s.swift_version = '5.2'
+  s.swift_version = '5.5'
   s.static_framework = true
 
   s.source_files = 'PocketRemoteSettings/Sources/**/*'
-
-  s.dependency 'RxSwift', '~> 5'
-  s.dependency 'RxRelay'
-  s.dependency 'RxCocoa'
   s.dependency 'Firebase/RemoteConfig'
 end

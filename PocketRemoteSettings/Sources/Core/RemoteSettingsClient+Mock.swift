@@ -1,6 +1,4 @@
 import Foundation
-import RxRelay
-import RxSwift
 import Combine
 
 extension RemoteSettingsClient {
@@ -8,11 +6,7 @@ extension RemoteSettingsClient {
         RemoteSettingsClient(
             value: { value },
             setup: {},
-            asObservable: {
-                Observable.just(value)
-                    .concat(Observable.never())
-                    .observeOn(MainScheduler.instance)
-            }, asPublisher: {
+            asPublisher: {
                 Just(value)
                     .receive(on: DispatchQueue.main)
                     .eraseToAnyPublisher()

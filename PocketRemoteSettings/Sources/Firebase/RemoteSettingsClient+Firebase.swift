@@ -7,7 +7,6 @@ extension RemoteSettingsClient where Value: Decodable {
         return RemoteSettingsClient(
             value: service.value,
             setup: service.setup,
-            asObservable: service.asObservable,
             asPublisher: service.asPublisher
         )
     }

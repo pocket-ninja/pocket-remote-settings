@@ -1,6 +1,6 @@
 {
   "name": "PocketRemoteSettings",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "summary": "The Pocket Ninja Remote Settings client.",
   "homepage": "https://github.com/pocket-ninja/pocket-remote-settings",
   "license": {
@@ -12,27 +12,18 @@
   },
   "source": {
     "git": "git@github.com:pocket-ninja/pocket-remote-settings.git",
-    "tag": "0.0.7"
+    "tag": "0.0.8"
   },
   "platforms": {
     "ios": "13.0"
   },
-  "swift_versions": "5.2",
+  "swift_versions": "5.5",
   "static_framework": true,
   "source_files": "PocketRemoteSettings/Sources/**/*",
   "dependencies": {
-    "RxSwift": [
-      "~> 5"
-    ],
-    "RxRelay": [
-
-    ],
-    "RxCocoa": [
-
-    ],
     "Firebase/RemoteConfig": [
 
     ]
   },
-  "swift_version": "5.2"
+  "swift_version": "5.5"
 }
