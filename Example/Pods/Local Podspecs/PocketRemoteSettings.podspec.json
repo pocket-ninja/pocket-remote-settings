@@ -1,6 +1,6 @@
 {
   "name": "PocketRemoteSettings",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "summary": "The Pocket Ninja Remote Settings client.",
   "homepage": "https://github.com/pocket-ninja/pocket-remote-settings",
   "license": {
@@ -12,10 +12,10 @@
   },
   "source": {
     "git": "git@github.com:pocket-ninja/pocket-remote-settings.git",
-    "tag": "0.0.8"
+    "tag": "0.0.10"
   },
   "platforms": {
-    "ios": "13.0"
+    "ios": "14.0"
   },
   "swift_versions": "5.5",
   "static_framework": true,

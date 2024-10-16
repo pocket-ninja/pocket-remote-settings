@@ -80,8 +80,9 @@ private extension RemoteConfig {
         let keys = allKeys(from: .remote)
         let object: [String: Any] = Dictionary(uniqueKeysWithValues: keys.compactMap { key in
             let value = configValue(forKey: key)
-
-            guard let string = value.stringValue, !string.isEmpty else {
+            let stringValue = value.stringValue
+            
+            guard !stringValue.isEmpty else {
                 return nil
             }
 
@@ -89,7 +90,7 @@ private extension RemoteConfig {
                 return (key, json)
             }
 
-            let trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+            let trimmedString = stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
 
             if trimmedString.lowercased() == "true" {
                 return (key, true)
@@ -107,7 +108,7 @@ private extension RemoteConfig {
                 return (key, double)
             }
 
-            return (key, string)
+            return (key, stringValue)
         })
 
         return try? JSONSerialization.data(withJSONObject: object, options: [])
