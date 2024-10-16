@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PocketRemoteSettings'
-  s.version          = '0.0.10'
+  s.version          = '0.0.11'
   s.summary          = 'The Pocket Ninja Remote Settings client.'
 
   s.homepage         = 'https://github.com/pocket-ninja/pocket-remote-settings'
